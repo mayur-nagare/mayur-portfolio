@@ -1,1017 +1,1526 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mayur Nagare — SDET & QA Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0e14;
-    --bg2: #111720;
-    --bg3: #1a2233;
-    --accent: #00e5a0;
-    --accent2: #0066ff;
-    --accent3: #ff4f5e;
-    --text: #e8edf5;
-    --muted: #6b7a94;
-    --border: rgba(255,255,255,0.07);
-    --mono: 'DM Mono', monospace;
-    --sans: 'Syne', sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* GRID LINES BG */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 3rem;
-    background: rgba(10,14,20,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--sans);
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
-
-  .nav-logo span { color: var(--text); }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--accent); }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 6rem 3rem 4rem;
-    z-index: 1;
-  }
-
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(0,229,160,0.07);
-    border: 1px solid rgba(0,229,160,0.2);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .hero-name {
-    font-family: var(--sans);
-    font-size: clamp(3rem, 8vw, 7rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -3px;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.6s ease 0.1s both;
-  }
-
-  .hero-name .line1 { display: block; color: var(--text); }
-  .hero-name .line2 {
-    display: block;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-    color: transparent;
-  }
-
-  .hero-role {
-    font-size: 13px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s ease 0.2s both;
-  }
-
-  .hero-role .highlight {
-    color: var(--accent);
-    -webkit-text-stroke: 0;
-  }
-
-  .hero-desc {
-    max-width: 560px;
-    color: rgba(232,237,245,0.7);
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    animation: fadeUp 0.6s ease 0.3s both;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    animation: fadeUp 0.6s ease 0.4s both;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: #0a0e14;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 14px 28px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,229,160,0.3);
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 13px 28px;
-    border: 1px solid var(--border);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* HERO STATS */
-  .hero-stats {
-    position: absolute;
-    right: 3rem;
-    bottom: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    animation: fadeUp 0.6s ease 0.5s both;
-  }
-
-  .stat {
-    text-align: right;
-    border-right: 2px solid var(--accent);
-    padding-right: 1.5rem;
-  }
-
-  .stat-num {
-    font-family: var(--sans);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 6rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-  }
-
-  .section-num {
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 2px;
-  }
-
-  .section-title {
-    font-family: var(--sans);
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: var(--text);
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .skill-card {
-    background: var(--bg2);
-    padding: 2rem;
-    transition: background 0.2s;
-    cursor: default;
-  }
-
-  .skill-card:hover { background: var(--bg3); }
-
-  .skill-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    filter: grayscale(0.3);
-  }
-
-  .skill-cat {
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-
-  .skill-name {
-    font-family: var(--sans);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 1rem;
-  }
-
-  .tag {
-    font-size: 11px;
-    padding: 3px 10px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 2px;
-  }
-
-  .tag.active {
-    border-color: rgba(0,229,160,0.3);
-    color: var(--accent);
-    background: rgba(0,229,160,0.05);
-  }
-
-  /* EXPERIENCE */
-  .exp-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-
-  .exp-item::before {
-    content: '';
-    position: absolute;
-    left: 190px;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-
-  .exp-item::after {
-    content: '';
-    position: absolute;
-    left: 185px;
-    top: 3.5rem;
-    width: 11px; height: 11px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--accent);
-  }
-
-  .exp-left { padding-right: 2rem; }
-
-  .exp-period {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-  }
-
-  .exp-company {
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .exp-location {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  .exp-role {
-    font-family: var(--sans);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 1rem;
-    letter-spacing: -0.5px;
-  }
-
-  .exp-desc {
-    color: rgba(232,237,245,0.65);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-size: 13px;
-  }
-
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-  /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .project-card {
-    background: var(--bg2);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.2s;
-  }
-
-  .project-card:hover { background: var(--bg3); }
-
-  .project-card::before {
-    content: attr(data-num);
-    position: absolute;
-    right: 1.5rem; top: 1.5rem;
-    font-family: var(--sans);
-    font-size: 4rem;
-    font-weight: 800;
-    color: rgba(255,255,255,0.03);
-    line-height: 1;
-  }
-
-  .project-status {
-    display: inline-block;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid rgba(0,229,160,0.25);
-    padding: 3px 10px;
-    border-radius: 2px;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-title {
-    font-family: var(--sans);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.3px;
-  }
-
-  .project-desc {
-    font-size: 13px;
-    color: rgba(232,237,245,0.6);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  /* CONTACT */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .contact-heading {
-    font-family: var(--sans);
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1;
-    margin-bottom: 2rem;
-  }
-
-  .contact-heading span { color: var(--accent); }
-
-  .contact-body {
-    color: rgba(232,237,245,0.6);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13px;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .contact-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .contact-link-icon {
-    color: var(--accent);
-    font-size: 1.1rem;
-    opacity: 0.7;
-  }
-
-  .contact-link-label {
-    flex: 1;
-  }
-
-  .contact-link-arrow { color: var(--muted); font-size: 0.9rem; }
-
-  /* AVAILABILITY CARD */
-  .avail-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .avail-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-  }
-
-  .avail-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1.5rem;
-  }
-
-  .avail-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
-
-  .avail-text {
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-
-  .avail-title {
-    font-family: var(--sans);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    letter-spacing: -0.5px;
-  }
-
-  .avail-roles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 1.5rem;
-  }
-
-  .avail-role {
-    font-size: 12px;
-    padding: 6px 14px;
-    background: rgba(0,229,160,0.07);
-    border: 1px solid rgba(0,229,160,0.2);
-    color: var(--accent);
-    border-radius: 2px;
-  }
-
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--muted);
-    font-size: 12px;
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* CURSOR LINE DECORATION */
-  .cursor-line::after {
-    content: '|';
-    animation: blink 1s step-end infinite;
-    color: var(--accent);
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    .hero-stats { position: static; flex-direction: row; justify-content: flex-start; margin-top: 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
-    .exp-item::before, .exp-item::after { display: none; }
-    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayur Nagare — SDET & QA Engineer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --bg2: #111720;
+      --bg3: #1a2233;
+      --accent: #00e5a0;
+      --accent2: #0066ff;
+      --accent3: #ff4f5e;
+      --text: #e8edf5;
+      --muted: #6b7a94;
+      --border: rgba(255, 255, 255, 0.07);
+      --mono: 'DM Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* GRID LINES BG */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 160, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 160, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(10, 14, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 3rem 4rem;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 229, 160, 0.07);
+      border: 1px solid rgba(0, 229, 160, 0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+      }
+    }
+
+    .hero-name {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .hero-name .line1 {
+      display: block;
+      color: var(--text);
+    }
+
+    .hero-name .line2 {
+      display: block;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+      color: transparent;
+    }
+
+    .hero-role {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .hero-role .highlight {
+      color: var(--accent);
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      color: rgba(232, 237, 245, 0.7);
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0e14;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 229, 160, 0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 28px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* HERO STATS */
+    .hero-stats {
+      position: absolute;
+      right: 3rem;
+      bottom: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeUp 0.6s ease 0.5s both;
+    }
+
+    .stat {
+      text-align: right;
+      border-right: 2px solid var(--accent);
+      padding-right: 1.5rem;
+    }
+
+    .stat-num {
+      font-family: var(--sans);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      padding: 2rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      background: var(--bg3);
+    }
+
+    .skill-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      filter: grayscale(0.3);
+    }
+
+    .skill-cat {
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-name {
+      font-family: var(--sans);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+    }
+
+    .tag.active {
+      border-color: rgba(0, 229, 160, 0.3);
+      color: var(--accent);
+      background: rgba(0, 229, 160, 0.05);
+    }
+
+    /* EXPERIENCE */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 190px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .exp-item::after {
+      content: '';
+      position: absolute;
+      left: 185px;
+      top: 3.5rem;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+    }
+
+    .exp-left {
+      padding-right: 2rem;
+    }
+
+    .exp-period {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-company {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .exp-location {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .exp-role {
+      font-family: var(--sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .exp-desc {
+      color: rgba(232, 237, 245, 0.65);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-size: 13px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* GROUPED COMPANY BLOCK */
+    .company-block {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 0;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      position: relative;
+    }
+
+    .company-block::before {
+      content: '';
+      position: absolute;
+      left: 190px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .company-left {
+      padding-right: 2rem;
+    }
+
+    .company-tenure {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .company-name-heading {
+      font-family: var(--sans);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .company-location-text {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .subroles {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .subrole {
+      padding: 1.75rem 0 1.75rem 2rem;
+      border-left: 2px solid var(--border);
+      position: relative;
+    }
+
+    .subrole::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 2.25rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+    }
+
+    .subrole:first-child {
+      padding-top: 0;
+    }
+
+    .subrole:first-child::before {
+      top: 0.4rem;
+    }
+
+    .subrole+.subrole {
+      border-top: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+
+    .subrole-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .subrole-title {
+      font-family: var(--sans);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .subrole-period {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .subrole-badge {
+      font-size: 10px;
+      padding: 2px 10px;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+
+    .subrole-desc {
+      color: rgba(232, 237, 245, 0.65);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 13px;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+
+    .project-card:hover {
+      background: var(--bg3);
+    }
+
+    .project-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-card {
+      position: relative;
+    }
+
+    .project-gh-link {
+      position: relative;
+      z-index: 999;
+    }
+
+    .project-gh-link {
+      color: var(--muted);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .project-gh-link:hover {
+      color: var(--accent);
+    }
+
+    .project-card::before {
+      content: attr(data-num);
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      font-family: var(--sans);
+      font-size: 4rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.03);
+      line-height: 1;
+    }
+
+    .project-status {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(0, 229, 160, 0.25);
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-title {
+      font-family: var(--sans);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.3px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: rgba(232, 237, 245, 0.6);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-heading {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+
+    .contact-heading span {
+      color: var(--accent);
+    }
+
+    .contact-body {
+      color: rgba(232, 237, 245, 0.6);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-link-icon {
+      color: var(--accent);
+      font-size: 1.1rem;
+      opacity: 0.7;
+    }
+
+    .contact-link-label {
+      flex: 1;
+    }
+
+    .contact-link-arrow {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* AVAILABILITY CARD */
+    .avail-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .avail-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .avail-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    .avail-text {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .avail-title {
+      font-family: var(--sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .avail-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .avail-role {
+      font-size: 12px;
+      padding: 6px 14px;
+      background: rgba(0, 229, 160, 0.07);
+      border: 1px solid rgba(0, 229, 160, 0.2);
+      color: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* CURSOR LINE DECORATION */
+    .cursor-line::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: var(--accent);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .hero-stats {
+        position: static;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 3rem;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .exp-item::before,
+      .exp-item::after {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">MN<span>.</span></div>
-  <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-secondary" style="font-size:11px; padding: 8px 18px;">LinkedIn ↗</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MN<span></span></div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-secondary"
+      style="font-size:11px; padding: 8px 18px;">LinkedIn ↗</a>
+  </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">Available for Senior SDET roles</div>
-    <h1 class="hero-name">
-      <span class="line1">MAYUR</span>
-      <span class="line2">NAGARE</span>
-    </h1>
-    <p class="hero-role">
-      <span class="highlight">SDET</span> &nbsp;/&nbsp; QA Automation Engineer &nbsp;/&nbsp; Pune, India
-    </p>
-    <p class="hero-desc">
-      Building bulletproof test automation frameworks that catch bugs before they ship.
-      4+ years turning manual pain points into scalable, CI-driven quality pipelines.
-    </p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">Get in touch →</a>
-      <a href="#experience" class="btn-secondary">View experience</a>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Available for Senior SDET roles</div>
+      <h1 class="hero-name">
+        <span class="line1">MAYUR</span>
+        <span class="line2">NAGARE</span>
+      </h1>
+      <p class="hero-role">
+        <span class="highlight">SDET</span> &nbsp;/&nbsp; QA Automation Engineer &nbsp;/&nbsp; Pune, India
+      </p>
+      <p class="hero-desc">
+        Building bulletproof test automation frameworks that catch bugs before they ship.
+        5+ years turning manual pain points into scalable, CI-driven quality pipelines.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get in touch →</a>
+        <a href="#experience" class="btn-secondary">View experience</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Years XP</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <!-- <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Bugs Caught</div>
+      </div> -->
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">4+</div>
-      <div class="stat-label">Years XP</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Companies</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">∞</div>
-      <div class="stat-label">Bugs Caught</div>
-    </div>
-  </div>
-</div>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-header reveal">
-    <span class="section-num">01 //</span>
-    <h2 class="section-title">Tech Stack</h2>
-    <div class="section-line"></div>
-  </div>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">01 //</span>
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="section-line"></div>
+    </div>
 
-  <div class="skills-grid reveal">
-    <div class="skill-card">
-      <div class="skill-icon">🎭</div>
-      <div class="skill-cat">Test Automation</div>
-      <div class="skill-name">Frontend & E2E</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">End-to-end browser automation with cross-browser support and parallel execution.</p>
-      <div class="skill-tags">
-        <span class="tag active">Selenium</span>
-        <span class="tag active">Playwright</span>
-        <span class="tag">Robot Framework</span>
-        <span class="tag">Pytest</span>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-icon">🎭</div>
+        <div class="skill-cat">Test Automation</div>
+        <div class="skill-name">Frontend & E2E</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">End-to-end browser automation with
+          cross-browser support and parallel execution.</p>
+        <div class="skill-tags">
+          <span class="tag active">Selenium</span>
+          <span class="tag active">Playwright</span>
+          <span class="tag">Robot Framework</span>
+          <span class="tag">Pytest</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-cat">Languages</div>
+        <div class="skill-name">Core Languages</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Writing maintainable test code, automation
+          scripts, and tooling.</p>
+        <div class="skill-tags">
+          <span class="tag active">Python</span>
+          <span class="tag">Bash</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-cat">Cloud & DevOps</div>
+        <div class="skill-name">CI/CD & Cloud</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Integrating test pipelines with cloud
+          infrastructure and build systems.</p>
+        <div class="skill-tags">
+          <span class="tag active">Jenkins</span>
+          <span class="tag active">AWS</span>
+          <span class="tag active">Azure</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🔌</div>
+        <div class="skill-cat">API & Backend</div>
+        <div class="skill-name">API Testing</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">REST API validation, contract testing, and
+          performance benchmarking.</p>
+        <div class="skill-tags">
+          <span class="tag active">Postman</span>
+          <span class="tag">REST Assured</span>
+          <span class="tag">Swagger</span>
+          <!-- <span class="tag">GraphQL</span> -->
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-cat">Data & Storage</div>
+        <div class="skill-name">Databases</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Query validation, data integrity checks, and
+          migration testing.</p>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag active">SQLite</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-cat">AI-Powered</div>
+        <div class="skill-name">LLM Integration</div>
+        <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Leveraging AI APIs to build smarter, adaptive
+          test automation workflows.</p>
+        <div class="skill-tags">
+          <span class="tag active">Anthropic API</span>
+          <span class="tag active">Claude</span>
+          <span class="tag">Cursor AI</span>
+          <span class="tag">MCP</span>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="skill-card">
-      <div class="skill-icon">🐍</div>
-      <div class="skill-cat">Languages</div>
-      <div class="skill-name">Core Languages</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Writing maintainable test code, automation scripts, and tooling.</p>
-      <div class="skill-tags">
-        <span class="tag active">Python</span>
-        <span class="tag">Java</span>
-        <span class="tag">Bash</span>
-        <span class="tag">JavaScript</span>
-      </div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <span class="section-num">02 //</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
     </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">☁️</div>
-      <div class="skill-cat">Cloud & DevOps</div>
-      <div class="skill-name">CI/CD & Cloud</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Integrating test pipelines with cloud infrastructure and build systems.</p>
-      <div class="skill-tags">
-        <span class="tag active">Jenkins</span>
-        <span class="tag active">AWS</span>
-        <span class="tag active">Azure</span>
-        <span class="tag">Docker</span>
+    <div class="exp-list">
+
+      <!-- ═══ DRUVA (grouped) ═══ -->
+      <div class="company-block reveal">
+        <div class="company-left">
+          <div class="company-tenure">Feb 2025 — Present</div>
+          <div class="company-name-heading" style="color:var(--accent);">Druva</div>
+          <div class="company-location-text">📍 Pune, India</div>
+          <div
+            style="margin-top:0.75rem; font-size:10px; padding:4px 10px; border:1px solid rgba(0,229,160,0.3); color:var(--accent); display:inline-block; letter-spacing:1px; border-radius:2px;">
+            CURRENT</div>
+          <div style="margin-top:0.6rem; font-size:10px; color:var(--muted);">2 roles · 1+ yr</div>
+        </div>
+        <div class="subroles">
+
+          <!-- Role 1: Staff SDET -->
+          <div class="subrole">
+            <div class="subrole-header">
+              <span class="subrole-title">Staff SDET</span>
+              <span class="subrole-period">May 2026 — Present</span>
+              <span class="subrole-badge"
+                style="background:rgba(0,229,160,0.1); border:1px solid rgba(0,229,160,0.3); color:var(--accent);">CURRENT</span>
+            </div>
+            <p class="subrole-desc">
+              Streamlined regression cycles by designing and deploying robust E2E test automation frameworks using
+              Robot Framework, Python, and Selenium — reducing manual effort by 20% and execution time by 35%.
+              Performing end-to-end feature testing and validation for new product functionalities, developing
+              Python-based automated test scenarios and utilities to ensure quality, reliability, and seamless
+              integration across releases.
+            </p>
+            <div class="exp-tags">
+              <span class="tag active">Robot Framework</span>
+              <span class="tag active">Python</span>
+              <span class="tag active">Selenium</span>
+              <span class="tag active">Cursor AI</span>
+              <span class="tag active">Playwright</span>
+              <span class="tag">Postman</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">AWS</span>
+            </div>
+          </div>
+
+          <!-- Role 2: SDET -->
+          <div class="subrole">
+            <div class="subrole-header">
+              <span class="subrole-title">SDET</span>
+              <span class="subrole-period">Feb 2025 — Apr 2026 · 1 yr 3 mos</span>
+            </div>
+            <p class="subrole-desc">
+              Conducted in-depth manual testing across UI and API layers, uncovering key defects pre-release and
+              reducing post-deployment bug reports for consistently stable rollouts. Developed a Python-based dynamic
+              file and test-data generation tool using Cursor AI, supporting large-scale stress and boundary testing
+              — increasing test surface area for file-processing modules by 25%. Verified and validated team-owned
+              features on the Managed Hybrid Cloud (MHC) through both manual and automated testing, debugging issues
+              during validation to ensure stability across releases. Assisted in PowerShell-based setup of newly
+              created automation VMs.
+            </p>
+            <div class="exp-tags">
+              <span class="tag active">Python</span>
+              <span class="tag active">Selenium</span>
+              <span class="tag active">Cursor AI</span>
+              <span class="tag">PowerShell</span>
+              <span class="tag">MHC</span>
+              <span class="tag">API Testing</span>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      <!-- ═══ ARCTERA (single role) ═══ -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">Nov 2024 — Feb 2025</div>
+          <div class="exp-company">Arctera</div>
+          <div class="exp-location">📍 Pune, India</div>
+          <div
+            style="margin-top:0.75rem; font-size:10px; padding:4px 10px; border:1px solid var(--border); color:var(--muted); display:inline-block; letter-spacing:1px;">
+            Veritas spin-off</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">SQA Engineer</div>
+          <p class="exp-desc">
+            Continued quality engineering post-Veritas spinoff as Arctera was carved out as an independent
+            data management company. Maintained and extended automation suites for enterprise storage products,
+            contributed to regression coverage for major release milestones, and collaborated across squads
+            on defect triaging and shift-left quality initiatives.
+          </p>
+          <div class="exp-tags">
+            <span class="tag active">Selenium</span>
+            <span class="tag active">Pytest</span>
+            <span class="tag active">Python</span>
+            <span class="tag active">Postman</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Microsoft Azure</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ VERITAS (single role) ═══ -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">Nov 2022 — Nov 2024</div>
+          <div class="exp-company">Veritas Technologies LLC</div>
+          <div class="exp-location">📍 Pune, India</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Associate Software QA Engineer</div>
+          <p class="exp-desc">
+            Started QA career at Veritas within the storage and system management domain.
+            Gained deep expertise in test design, manual &amp; automated regression, and Agile QA workflows
+            within a large-scale enterprise engineering org.
+          </p>
+          <div class="exp-tags">
+            <span class="tag active">Selenium</span>
+            <span class="tag active">Postman</span>
+            <span class="tag active">Pytest</span>
+            <span class="tag">C#</span>
+            <span class="tag">Microsoft Azure</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Manual Testing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ RAINLANG (single role) ═══ -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">Aug 2022 — Nov 2022</div>
+          <div class="exp-company" style="color:#b57bee;">Rainlang</div>
+          <div class="exp-location">🌐 Remote · Freelance</div>
+          <div
+            style="margin-top:0.75rem; font-size:10px; padding:4px 10px; border:1px solid rgba(181,123,238,0.3); color:#b57bee; display:inline-block; letter-spacing:1px;">
+            7 MONTHS</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Software Developer <span
+              style="font-size:0.85rem; color:var(--muted); font-family:var(--mono); font-weight:400;">·
+              Freelance</span></div>
+          <p class="exp-desc">
+            Built dynamic, mobile-responsive web application POCs using Svelte and TypeScript.
+            Translated design mockups into high-quality interactive UIs, integrated frontends with backend REST
+            APIs and GraphQL, and validated builds using Cypress for end-to-end test coverage.
+          </p>
+          <div class="exp-tags">
+            <span class="tag active">Svelte</span>
+            <span class="tag active">TypeScript</span>
+            <span class="tag active">GraphQL</span>
+            <span class="tag active">Cypress</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SKILLEDGE (grouped) ═══ -->
+      <div class="company-block reveal">
+        <div class="company-left">
+          <div class="company-tenure">Nov 2020 — Aug 2022</div>
+          <div class="company-name-heading" style="color:#f0a05a;">SKILLEDGE</div>
+          <div class="company-location-text">📍 Pimple Saudagar, Pune</div>
+          <div
+            style="margin-top:0.75rem; font-size:10px; padding:4px 10px; border:1px solid rgba(240,160,90,0.3); color:#f0a05a; display:inline-block; letter-spacing:1px; border-radius:2px;">
+            EdTech Startup</div>
+          <div style="margin-top:0.6rem; font-size:10px; color:var(--muted);">2 roles · 1 yr 9 mos</div>
+        </div>
+        <div class="subroles">
+
+          <!-- Role 1: Software Developer -->
+          <div class="subrole" style="border-left-color: rgba(240,160,90,0.3);">
+            <style>
+              .skilledge-dot::before {
+                border-color: #f0a05a !important;
+              }
+            </style>
+            <div class="subrole-header">
+              <span class="subrole-title">Software Developer</span>
+              <span class="subrole-period">Aug 2021 — Jul 2022 · 1 yr</span>
+              <span class="subrole-badge"
+                style="background:rgba(240,160,90,0.08); border:1px solid rgba(240,160,90,0.25); color:#f0a05a;">Full-time</span>
+            </div>
+            <p class="subrole-desc">
+              Designed and developed an EdTech platform initially built on WordPress and ReactJS, then migrated the
+              architecture to Postgres and ReactJS. Handled debugging across the full stack, brought technology
+              optimisation strategies to internal courses, and contributed feature development across the product
+              lifecycle.
+            </p>
+            <div class="exp-tags">
+              <span class="tag active">ReactJS</span>
+              <span class="tag active">Postgres</span>
+              <span class="tag active">WordPress</span>
+              <span class="tag">Python</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Full-stack</span>
+              <span class="tag">PHP</span>
+            </div>
+          </div>
+
+          <!-- Role 2: Intern -->
+          <div class="subrole" style="border-left-color: rgba(240,160,90,0.3);">
+            <div class="subrole-header">
+              <span class="subrole-title">IT Developer Intern</span>
+              <span class="subrole-period">Nov 2020 — Jul 2021 · 9 mos</span>
+            </div>
+            <p class="subrole-desc">
+              First professional role — joined SKILLEDGE as an IT Developer Intern while completing B.E., gaining
+              hands-on exposure to real-world software development workflows, codebase navigation, and product
+              delivery in an EdTech startup environment.
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Web Development</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">PHP</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-num">03 //</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
     </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">🔌</div>
-      <div class="skill-cat">API & Backend</div>
-      <div class="skill-name">API Testing</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">REST API validation, contract testing, and performance benchmarking.</p>
-      <div class="skill-tags">
-        <span class="tag active">Postman</span>
-        <span class="tag">REST Assured</span>
-        <span class="tag">Swagger</span>
-        <span class="tag">GraphQL</span>
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-period">2017 — 2021</div>
+          <div class="exp-company" style="color:#5aacf0;">D.Y. Patil College of Engineering</div>
+          <div class="exp-location">📍 Akurdi, Pune</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">B.E. — Computer Engineering</div>
+          <p class="exp-desc">
+            Bachelor of Engineering in Computer Engineering from D.Y. Patil Pratishthan's D.Y. Patil College of
+            Engineering, Akurdi, Pune.
+            Built strong foundations in data structures, algorithms, software engineering, networking and operating
+            systems —
+            the bedrock of a career spanning full-stack development and quality engineering.
+          </p>
+          <div class="exp-tags">
+            <span class="tag">Computer Engineering</span>
+            <span class="tag">Data Structures &amp; Algorithms</span>
+            <span class="tag">Software Engineering</span>
+            <span class="tag">Computer Networks</span>
+            <span class="tag">OS</span>
+            <span class="tag">DBMS</span>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="skill-card">
-      <div class="skill-icon">🗄️</div>
-      <div class="skill-cat">Data & Storage</div>
-      <div class="skill-name">Databases</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Query validation, data integrity checks, and migration testing.</p>
-      <div class="skill-tags">
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">MySQL</span>
-        <span class="tag active">SQLite</span>
-        <span class="tag">MongoDB</span>
-      </div>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">04 //</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
     </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">🤖</div>
-      <div class="skill-cat">AI-Powered</div>
-      <div class="skill-name">LLM Integration</div>
-      <p style="font-size:12px; color: var(--muted); margin-top:0.5rem;">Leveraging AI APIs to build smarter, adaptive test automation workflows.</p>
-      <div class="skill-tags">
-        <span class="tag active">Anthropic API</span>
-        <span class="tag active">Claude</span>
-        <span class="tag">Prompt Eng.</span>
-        <span class="tag">MCP</span>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="projects-grid reveal">
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header reveal">
-    <span class="section-num">02 //</span>
-    <h2 class="section-title">Experience</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="exp-list">
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-period">2023 — Present</div>
-        <div class="exp-company">Arctera</div>
-        <div class="exp-location">📍 Pune, India</div>
-      </div>
-      <div class="exp-right">
-        <div class="exp-role">SDET</div>
-        <p class="exp-desc">
-          Advancing from SQA 2 to SDET role, owning test automation architecture for enterprise data management products. 
-          Designing Python-based frameworks with Playwright and Selenium, integrating directly into Jenkins CI/CD pipelines. 
-          Driving shift-left quality practices across cross-functional squads.
+      <!-- PROJECT 1 -->
+      <div class="project-card" data-num="01">
+        <div class="project-card-top">
+          <div class="project-status">🤖 Automation · Python</div>
+          <a href="https://github.com/mayur-nagare/linkedin-networking-and-jobs-automation" target="_blank"
+            class="project-gh-link" title="View on GitHub">
+            <svg height="18" viewBox="0 0 16 16" width="18" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
+        </div>
+        <div class="project-title">LinkedIn Job Automation Bot</div>
+        <p class="project-desc">
+          Semi-automated Python tool to streamline job searching on LinkedIn. Auto-applies to Easy Apply jobs, finds HR
+          managers at target companies, sends personalized connection requests, and rotates message templates. Tracks
+          every application and connection in a SQLite database with an interactive CLI dashboard for status management
+          and CSV export.
         </p>
-        <div class="exp-tags">
+        <div class="skill-tags">
           <span class="tag active">Python</span>
           <span class="tag active">Playwright</span>
-          <span class="tag active">Selenium</span>
-          <span class="tag active">Jenkins</span>
-          <span class="tag">Robot Framework</span>
-          <span class="tag">Azure</span>
+          <span class="tag active">SQLite</span>
+          <span class="tag">Selenium</span>
+          <span class="tag">CLI Dashboard</span>
         </div>
       </div>
-    </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-period">2021 — 2023</div>
-        <div class="exp-company">Veritas Technologies</div>
-        <div class="exp-location">📍 Pune, India</div>
-      </div>
-      <div class="exp-right">
-        <div class="exp-role">SQA Engineer II</div>
-        <p class="exp-desc">
-          Progressed from SQA 1 to SQA 2 within the data protection & backup domain. 
-          Built and maintained regression suites for enterprise storage products, 
-          collaborated closely with dev teams on defect triaging, and owned automation 
-          coverage for critical release milestones.
+      <!-- PROJECT 2 -->
+      <div class="project-card" data-num="02">
+        <div class="project-card-top">
+          <div class="project-status">🎓 ERP · Full-stack</div>
+          <a href="https://github.com/SocioDroid/TnPVision" target="_blank" class="project-gh-link"
+            title="View on GitHub">
+            <svg height="18" viewBox="0 0 16 16" width="18" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
+        </div>
+        <div class="project-title">TnPVision — T&P Cell ERP</div>
+        <p class="project-desc">
+          ERP system for Training and Placement cells on college campuses. Integrates student information management,
+          placement analytics, and a recruiter portal to streamline the entire campus hiring process. Gives insight to
+          all stakeholders — students, TPO, and employers — about placement activities and individual performance.
         </p>
-        <div class="exp-tags">
-          <span class="tag active">Selenium</span>
-          <span class="tag active">Pytest</span>
-          <span class="tag active">Postman</span>
-          <span class="tag">Java</span>
-          <span class="tag">AWS</span>
-          <span class="tag">Jenkins</span>
+        <div class="skill-tags">
+          <span class="tag active">ReactJS</span>
+          <span class="tag active">Django</span>
+          <span class="tag active">MongoDB</span>
+          <span class="tag">Material-UI</span>
+          <span class="tag">Cube.js</span>
+          <span class="tag">REST API</span>
         </div>
       </div>
-    </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-period">2019 — 2021</div>
-        <div class="exp-company">Druva</div>
-        <div class="exp-location">📍 Pune, India</div>
-      </div>
-      <div class="exp-right">
-        <div class="exp-role">SQA Engineer I</div>
-        <p class="exp-desc">
-          Kickstarted QA career in cloud data protection at a fast-paced SaaS company. 
-          Gained foundational expertise in manual and automated testing for cloud-native 
-          backup solutions, learning test design, API testing, and agile QA workflows.
+      <!-- PROJECT 3 -->
+      <div class="project-card" data-num="03">
+        <div class="project-card-top">
+          <div class="project-status">🤖 Playwright · Web Scraper</div>
+          <a href="https://github.com/mayur-nagare/Playwright-QA-Epex-Market-Scraper" target="_blank"
+            class="project-gh-link" title="View on GitHub">
+            <svg height="18" viewBox="0 0 16 16" width="18" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
+        </div>
+        <div class="project-title">EPEX SPOT Market Scraper</div>
+        <p class="project-desc">
+          Playwright-based automation that scrapes real-time EPEX SPOT Market Results (Low, High, Last, Weight Avg)
+          for GB Continuous Intraday market. Extracts data from dynamic tables and exports it to a timestamped CSV file.
+          Built as a QA Automation practical task with robust error handling and clean architecture.
         </p>
-        <div class="exp-tags">
-          <span class="tag">Manual Testing</span>
-          <span class="tag">API Testing</span>
-          <span class="tag">Postman</span>
-          <span class="tag">AWS</span>
-          <span class="tag active">Python</span>
+        <div class="skill-tags">
+          <span class="tag active">Playwright</span>
+          <span class="tag active">TypeScript</span>
+          <span class="tag active">Node.js</span>
+          <span class="tag">Web Scraping</span>
+          <span class="tag">CSV Export</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header reveal">
-    <span class="section-num">03 //</span>
-    <h2 class="section-title">Projects</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="projects-grid reveal">
-    <div class="project-card" data-num="01">
-      <div class="project-status">Active Build</div>
-      <div class="project-title">LinkedIn Job Automation Bot</div>
-      <p class="project-desc">
-        AI-powered job application bot using Playwright + Claude (claude-sonnet-4-6) 
-        for intelligent Easy Apply modal handling. Features per-keyword search loops, 
-        SQLite duplicate detection, company allow/block filtering, and structured 
-        settings management via JSON config.
-      </p>
-      <div class="skill-tags">
-        <span class="tag active">Python</span>
-        <span class="tag active">Playwright</span>
-        <span class="tag active">Anthropic API</span>
-        <span class="tag active">SQLite</span>
-        <span class="tag">MCP</span>
-      </div>
-    </div>
-
-    <div class="project-card" data-num="02">
-      <div class="project-status">Framework</div>
-      <div class="project-title">E2E Automation Framework</div>
-      <p class="project-desc">
-        Production-grade test automation framework with multi-selector fallbacks 
-        for UI variant handling, parallel execution, and direct CI pipeline 
-        integration. Designed for enterprise-scale reliability.
-      </p>
-      <div class="skill-tags">
-        <span class="tag active">Selenium</span>
-        <span class="tag active">Pytest</span>
-        <span class="tag active">Jenkins</span>
-        <span class="tag">Python</span>
-        <span class="tag">Docker</span>
-      </div>
-    </div>
-
-    <div class="project-card" data-num="03">
-      <div class="project-status">Tooling</div>
-      <div class="project-title">API Test Suite — Postman/Python</div>
-      <p class="project-desc">
-        Comprehensive REST API validation layer with contract testing, 
-        schema validation, and automated regression across multiple 
-        environments. Integrated with Jenkins for nightly runs.
-      </p>
-      <div class="skill-tags">
-        <span class="tag active">Postman</span>
-        <span class="tag active">Python</span>
-        <span class="tag">Newman</span>
-        <span class="tag">REST</span>
-        <span class="tag">Jenkins</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-grid">
-    <div class="reveal">
-      <h2 class="contact-heading">Let's<br><span>build</span><br>together.</h2>
-      <p class="contact-body">
-        Open to Senior SDET and Senior QA Engineer opportunities — 
-        primarily in Pune with remote options. 
-        Strong interest in companies in the data protection and cloud storage space.
-      </p>
-      <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-primary">View LinkedIn ↗</a>
-    </div>
-
-    <div class="reveal">
-      <div class="avail-card" style="margin-bottom: 1rem;">
-        <div class="avail-status">
-          <div class="avail-dot"></div>
-          <span class="avail-text">Open to opportunities</span>
+      <!-- PROJECT 4 -->
+      <div class="project-card" data-num="04">
+        <div class="project-card-top">
+          <div class="project-status">⚛️ React · POC</div>
+          <a href="https://github.com/mayur-nagare/Post-Album-Task-Management-System" target="_blank"
+            class="project-gh-link" title="View on GitHub">
+            <svg height="18" viewBox="0 0 16 16" width="18" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </a>
         </div>
-        <div class="avail-title">Currently seeking<br>Senior roles</div>
-        <p style="font-size:12px; color:var(--muted); margin-top:0.5rem; line-height:1.7;">
-          Targeting Pune-based and remote positions. Priority companies include Nutanix, Cohesity, Dell Technologies.
+        <div class="project-title">Post-Album Task Management</div>
+        <p class="project-desc">
+          React-based POC web app demonstrating API integration and UI functionality — managing posts, albums, and tasks
+          via third-party REST APIs. Built to showcase frontend engineering skills including API consumption, component
+          architecture, and responsive UI design. Live on Netlify.
         </p>
-        <div class="avail-roles">
-          <span class="avail-role">Senior SDET</span>
-          <span class="avail-role">Sr. QA Engineer</span>
-          <span class="avail-role">Test Architect</span>
+        <div class="skill-tags">
+          <span class="tag active">ReactJS</span>
+          <span class="tag active">JavaScript</span>
+          <span class="tag active">REST API</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Netlify</span>
         </div>
       </div>
 
-      <div class="contact-links">
-        <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="contact-link">
-          <span class="contact-link-icon">in</span>
-          <span class="contact-link-label">linkedin.com/in/mayurnagare</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="mailto:mayurnagare@email.com" class="contact-link">
-          <span class="contact-link-icon">@</span>
-          <span class="contact-link-label">Pune, Maharashtra, India</span>
-          <span class="contact-link-arrow">📍</span>
-        </a>
+    </div>
+
+    <div style="text-align:center; margin-top: 2.5rem;">
+      <a href="https://github.com/mayur-nagare" target="_blank" class="btn-secondary">
+        View all on GitHub ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="reveal">
+        <h2 class="contact-heading">Let's<br><span>build</span><br>together.</h2>
+        <p class="contact-body">
+          Open to Senior SDET and Senior QA Engineer opportunities —
+          primarily in Pune with remote options.
+          Strong interest in companies in the data protection and cloud storage space.
+        </p>
+        <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-primary">View LinkedIn ↗</a>
+      </div>
+
+      <div class="reveal">
+        <div class="avail-card" style="margin-bottom: 1rem;">
+          <div class="avail-status">
+            <div class="avail-dot"></div>
+            <span class="avail-text">Open to opportunities</span>
+          </div>
+          <div class="avail-title">Currently seeking<br>Senior roles</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:0.5rem; line-height:1.7;">
+            Targeting Pune-based and remote positions. Priority companies include Nutanix, Cohesity, Dell Technologies.
+          </p>
+          <div class="avail-roles">
+            <span class="avail-role">Senior SDET</span>
+            <span class="avail-role">Sr. QA Engineer</span>
+            <!-- <span class="avail-role">Test Architect</span> -->
+          </div>
+        </div>
+
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="contact-link">
+            <span class="contact-link-icon">in</span>
+            <span class="contact-link-label">linkedin.com/in/mayurnagare</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="mailto:mayurnagare@email.com" class="contact-link">
+            <span class="contact-link-icon">@</span>
+            <span class="contact-link-label">Pune, Maharashtra, India</span>
+            <span class="contact-link-arrow">📍</span>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Mayur Nagare — SDET</span>
-  <span style="color: var(--accent);">Pune, India &nbsp;·&nbsp; Open to opportunities</span>
-  <span>Built with precision 🛠</span>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Mayur Nagare — SDET</span>
+    <span style="color: var(--accent);">Pune, India &nbsp;·&nbsp; Open to opportunities</span>
+    <span>Built with precision 🛠</span>
+  </footer>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.1 });
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
+
 </html>
