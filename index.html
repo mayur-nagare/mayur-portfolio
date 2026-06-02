@@ -1,6 +1,91 @@
+
+tally · current session
+63%
+≈2.1 sonnet msgs
+resets in 4h 47m
+weekly · all models
+5% · Mon 6:30
+Claude finished the response
+
+index.html
+html
+
+This page is not mobile responsive. I need a mobile and desktop friendly page .
+
+alos the gap between the two section should be minimal
+
+18:54
+
+Viewed 3 files
+Viewed 3 files
+Now I have a full picture of the file. Let me build the improved responsive version with proper mobile support and tightened section gaps.
+
+
+Read the remaining HTML content
+Read the remaining HTML content
+Now I have everything. Let me build the fully responsive version with all issues fixed.
+
+
+Check the skills section for frontend design patterns
+Check the skills section for frontend design patterns
+Now I'll create the fully responsive version. The main issues to fix are:
+
+hero-stats overflows on mobile (positioned absolutely)
+company-block / exp-item two-column grid breaks on small screens
+::before timeline decorations use fixed left: 190px which breaks on mobile
+section padding is too large on mobile
+Section-to-section gap needs tightening
+Nav hamburger menu needed
+Footer wrapping
+
+Ran a command, edited a file
+Ran a command, edited a file
+Now add the hamburger button to the nav HTML and the mobile drawer:
+
+
+Edited 2 files
+Edited 2 files
+Now add the hamburger JS to the script block:
+
+
+Add hamburger JS logic to script block
+Add hamburger JS logic to script block
+Now copy to outputs:
+
+
+Ran a command, read a file
+Ran a command, read a file
+Here's what was fixed and improved:
+
+Mobile responsiveness (new/fixed)
+
+Hamburger menu — nav links collapse at ≤768px into a slide-down drawer with animated ☰ → ✕ toggle
+Hero stats — removed the position: absolute that caused overflow; they now flow inline below the CTAs on mobile, with left-border style instead of right-border
+Experience & company blocks — the fixed 200px left column now stacks vertically on mobile, and the ::before timeline lines (which used hardcoded left: 190px) are hidden on mobile and recalculated at tablet size
+Skills grid — drops to 1 column on small screens
+CTA buttons — go full-width stacked on very small screens (≤400px)
+Gap reduction
+
+Section padding reduced from 6rem → 4rem (desktop) and 3rem (mobile)
+section-header bottom margin trimmed from 4rem → 2.5rem
+Tablet breakpoint (769–1023px) — new intermediate layout added so the timeline columns gracefully shrink before fully collapsing
+
+
+Index
+Code · HTML 
+
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+
+
+raw
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +107,7 @@
       --mono: 'DM Mono', monospace;
       --sans: 'Syne', sans-serif;
     }
-
+ 
     *,
     *::before,
     *::after {
@@ -30,11 +115,11 @@
       margin: 0;
       padding: 0;
     }
-
+ 
     html {
       scroll-behavior: smooth;
     }
-
+ 
     body {
       background: var(--bg);
       color: var(--text);
@@ -43,7 +128,7 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
+ 
     /* GRID LINES BG */
     body::before {
       content: '';
@@ -56,7 +141,7 @@
       pointer-events: none;
       z-index: 0;
     }
-
+ 
     /* NAV */
     nav {
       position: fixed;
@@ -72,7 +157,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-
+ 
     .nav-logo {
       font-family: var(--sans);
       font-weight: 800;
@@ -80,17 +165,17 @@
       color: var(--accent);
       letter-spacing: -0.5px;
     }
-
+ 
     .nav-logo span {
       color: var(--text);
     }
-
+ 
     .nav-links {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
-
+ 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
@@ -99,11 +184,11 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
+ 
     .nav-links a:hover {
       color: var(--accent);
     }
-
+ 
     /* HERO */
     .hero {
       position: relative;
@@ -113,13 +198,13 @@
       padding: 6rem 3rem 4rem;
       z-index: 1;
     }
-
+ 
     .hero-inner {
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
     }
-
+ 
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -135,7 +220,7 @@
       margin-bottom: 2rem;
       animation: fadeUp 0.6s ease both;
     }
-
+ 
     .hero-tag::before {
       content: '';
       width: 6px;
@@ -144,21 +229,21 @@
       background: var(--accent);
       animation: pulse 2s infinite;
     }
-
+ 
     @keyframes pulse {
-
+ 
       0%,
       100% {
         opacity: 1;
         transform: scale(1);
       }
-
+ 
       50% {
         opacity: 0.4;
         transform: scale(0.8);
       }
     }
-
+ 
     .hero-name {
       font-family: var(--sans);
       font-size: clamp(3rem, 8vw, 7rem);
@@ -168,18 +253,18 @@
       margin-bottom: 1.5rem;
       animation: fadeUp 0.6s ease 0.1s both;
     }
-
+ 
     .hero-name .line1 {
       display: block;
       color: var(--text);
     }
-
+ 
     .hero-name .line2 {
       display: block;
       -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
       color: transparent;
     }
-
+ 
     .hero-role {
       font-size: 13px;
       color: var(--muted);
@@ -188,12 +273,12 @@
       margin-bottom: 2rem;
       animation: fadeUp 0.6s ease 0.2s both;
     }
-
+ 
     .hero-role .highlight {
       color: var(--accent);
       -webkit-text-stroke: 0;
     }
-
+ 
     .hero-desc {
       max-width: 560px;
       color: rgba(232, 237, 245, 0.7);
@@ -202,14 +287,14 @@
       margin-bottom: 3rem;
       animation: fadeUp 0.6s ease 0.3s both;
     }
-
+ 
     .hero-ctas {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       animation: fadeUp 0.6s ease 0.4s both;
     }
-
+ 
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -227,12 +312,12 @@
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
+ 
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(0, 229, 160, 0.3);
     }
-
+ 
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -249,12 +334,12 @@
       cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
     }
-
+ 
     .btn-secondary:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
-
+ 
     /* HERO STATS */
     .hero-stats {
       position: absolute;
@@ -265,13 +350,13 @@
       gap: 1.5rem;
       animation: fadeUp 0.6s ease 0.5s both;
     }
-
+ 
     .stat {
       text-align: right;
       border-right: 2px solid var(--accent);
       padding-right: 1.5rem;
     }
-
+ 
     .stat-num {
       font-family: var(--sans);
       font-size: 2.5rem;
@@ -279,26 +364,26 @@
       color: var(--accent);
       line-height: 1;
     }
-
+ 
     .stat-label {
       font-size: 10px;
       color: var(--muted);
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
-
+ 
     @keyframes fadeUp {
       from {
         opacity: 0;
         transform: translateY(24px);
       }
-
+ 
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-
+ 
     /* SECTIONS */
     section {
       position: relative;
@@ -307,20 +392,20 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-
+ 
     .section-header {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       margin-bottom: 4rem;
     }
-
+ 
     .section-num {
       font-size: 11px;
       color: var(--accent);
       letter-spacing: 2px;
     }
-
+ 
     .section-title {
       font-family: var(--sans);
       font-size: clamp(1.8rem, 4vw, 3rem);
@@ -328,13 +413,13 @@
       letter-spacing: -1px;
       color: var(--text);
     }
-
+ 
     .section-line {
       flex: 1;
       height: 1px;
       background: var(--border);
     }
-
+ 
     /* SKILLS */
     .skills-grid {
       display: grid;
@@ -343,24 +428,24 @@
       background: var(--border);
       border: 1px solid var(--border);
     }
-
+ 
     .skill-card {
       background: var(--bg2);
       padding: 2rem;
       transition: background 0.2s;
       cursor: default;
     }
-
+ 
     .skill-card:hover {
       background: var(--bg3);
     }
-
+ 
     .skill-icon {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       filter: grayscale(0.3);
     }
-
+ 
     .skill-cat {
       font-size: 10px;
       color: var(--accent);
@@ -368,7 +453,7 @@
       text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
-
+ 
     .skill-name {
       font-family: var(--sans);
       font-size: 1.1rem;
@@ -376,14 +461,14 @@
       color: var(--text);
       margin-bottom: 0.5rem;
     }
-
+ 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       margin-top: 1rem;
     }
-
+ 
     .tag {
       font-size: 11px;
       padding: 3px 10px;
@@ -391,20 +476,20 @@
       color: var(--muted);
       border-radius: 2px;
     }
-
+ 
     .tag.active {
       border-color: rgba(0, 229, 160, 0.3);
       color: var(--accent);
       background: rgba(0, 229, 160, 0.05);
     }
-
+ 
     /* EXPERIENCE */
     .exp-list {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
-
+ 
     .exp-item {
       display: grid;
       grid-template-columns: 200px 1fr;
@@ -413,7 +498,7 @@
       border-bottom: 1px solid var(--border);
       position: relative;
     }
-
+ 
     .exp-item::before {
       content: '';
       position: absolute;
@@ -423,7 +508,7 @@
       width: 1px;
       background: var(--border);
     }
-
+ 
     .exp-item::after {
       content: '';
       position: absolute;
@@ -435,31 +520,31 @@
       background: var(--bg);
       border: 2px solid var(--accent);
     }
-
+ 
     .exp-left {
       padding-right: 2rem;
     }
-
+ 
     .exp-period {
       font-size: 11px;
       color: var(--muted);
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
     }
-
+ 
     .exp-company {
       font-family: var(--sans);
       font-size: 0.95rem;
       font-weight: 700;
       color: var(--accent);
     }
-
+ 
     .exp-location {
       font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
     }
-
+ 
     .exp-role {
       font-family: var(--sans);
       font-size: 1.4rem;
@@ -468,20 +553,20 @@
       margin-bottom: 1rem;
       letter-spacing: -0.5px;
     }
-
+ 
     .exp-desc {
       color: rgba(232, 237, 245, 0.65);
       line-height: 1.8;
       margin-bottom: 1.5rem;
       font-size: 13px;
     }
-
+ 
     .exp-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
-
+ 
     /* GROUPED COMPANY BLOCK */
     .company-block {
       border-bottom: 1px solid var(--border);
@@ -491,7 +576,7 @@
       gap: 3rem;
       position: relative;
     }
-
+ 
     .company-block::before {
       content: '';
       position: absolute;
@@ -501,18 +586,18 @@
       width: 1px;
       background: var(--border);
     }
-
+ 
     .company-left {
       padding-right: 2rem;
     }
-
+ 
     .company-tenure {
       font-size: 11px;
       color: var(--muted);
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
     }
-
+ 
     .company-name-heading {
       font-family: var(--sans);
       font-size: 1.15rem;
@@ -520,24 +605,24 @@
       letter-spacing: -0.3px;
       margin-bottom: 4px;
     }
-
+ 
     .company-location-text {
       font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
     }
-
+ 
     .subroles {
       display: flex;
       flex-direction: column;
     }
-
+ 
     .subrole {
       padding: 1.75rem 0 1.75rem 2rem;
       border-left: 2px solid var(--border);
       position: relative;
     }
-
+ 
     .subrole::before {
       content: '';
       position: absolute;
@@ -549,19 +634,19 @@
       background: var(--bg);
       border: 2px solid var(--accent);
     }
-
+ 
     .subrole:first-child {
       padding-top: 0;
     }
-
+ 
     .subrole:first-child::before {
       top: 0.4rem;
     }
-
+ 
     .subrole+.subrole {
       border-top: 1px dashed rgba(255, 255, 255, 0.05);
     }
-
+ 
     .subrole-header {
       display: flex;
       align-items: baseline;
@@ -569,7 +654,7 @@
       flex-wrap: wrap;
       margin-bottom: 0.75rem;
     }
-
+ 
     .subrole-title {
       font-family: var(--sans);
       font-size: 1.15rem;
@@ -577,27 +662,27 @@
       color: var(--text);
       letter-spacing: -0.3px;
     }
-
+ 
     .subrole-period {
       font-size: 11px;
       color: var(--muted);
       letter-spacing: 1px;
     }
-
+ 
     .subrole-badge {
       font-size: 10px;
       padding: 2px 10px;
       border-radius: 2px;
       letter-spacing: 1px;
     }
-
+ 
     .subrole-desc {
       color: rgba(232, 237, 245, 0.65);
       line-height: 1.8;
       margin-bottom: 1rem;
       font-size: 13px;
     }
-
+ 
     /* PROJECTS */
     .projects-grid {
       display: grid;
@@ -606,7 +691,7 @@
       background: var(--border);
       border: 1px solid var(--border);
     }
-
+ 
     .project-card {
       background: var(--bg2);
       padding: 2.5rem;
@@ -614,38 +699,38 @@
       overflow: hidden;
       transition: background 0.2s;
     }
-
+ 
     .project-card:hover {
       background: var(--bg3);
     }
-
+ 
     .project-card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1.25rem;
     }
-
+ 
     .project-card {
       position: relative;
     }
-
+ 
     .project-gh-link {
       position: relative;
       z-index: 999;
     }
-
+ 
     .project-gh-link {
       color: var(--muted);
       transition: color 0.2s;
       display: flex;
       align-items: center;
     }
-
+ 
     .project-gh-link:hover {
       color: var(--accent);
     }
-
+ 
     .project-card::before {
       content: attr(data-num);
       position: absolute;
@@ -657,7 +742,7 @@
       color: rgba(255, 255, 255, 0.03);
       line-height: 1;
     }
-
+ 
     .project-status {
       display: inline-block;
       font-size: 10px;
@@ -669,7 +754,7 @@
       border-radius: 2px;
       margin-bottom: 1.5rem;
     }
-
+ 
     .project-title {
       font-family: var(--sans);
       font-size: 1.3rem;
@@ -678,14 +763,14 @@
       margin-bottom: 0.75rem;
       letter-spacing: -0.3px;
     }
-
+ 
     .project-desc {
       font-size: 13px;
       color: rgba(232, 237, 245, 0.6);
       line-height: 1.7;
       margin-bottom: 1.5rem;
     }
-
+ 
     /* CONTACT */
     .contact-grid {
       display: grid;
@@ -693,7 +778,7 @@
       gap: 4rem;
       align-items: start;
     }
-
+ 
     .contact-heading {
       font-family: var(--sans);
       font-size: clamp(2rem, 5vw, 4rem);
@@ -702,23 +787,23 @@
       line-height: 1;
       margin-bottom: 2rem;
     }
-
+ 
     .contact-heading span {
       color: var(--accent);
     }
-
+ 
     .contact-body {
       color: rgba(232, 237, 245, 0.6);
       line-height: 1.8;
       margin-bottom: 2rem;
     }
-
+ 
     .contact-links {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-
+ 
     .contact-link {
       display: flex;
       align-items: center;
@@ -730,27 +815,27 @@
       border: 1px solid var(--border);
       transition: border-color 0.2s, color 0.2s;
     }
-
+ 
     .contact-link:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
-
+ 
     .contact-link-icon {
       color: var(--accent);
       font-size: 1.1rem;
       opacity: 0.7;
     }
-
+ 
     .contact-link-label {
       flex: 1;
     }
-
+ 
     .contact-link-arrow {
       color: var(--muted);
       font-size: 0.9rem;
     }
-
+ 
     /* AVAILABILITY CARD */
     .avail-card {
       background: var(--bg2);
@@ -759,7 +844,7 @@
       position: relative;
       overflow: hidden;
     }
-
+ 
     .avail-card::before {
       content: '';
       position: absolute;
@@ -769,14 +854,14 @@
       height: 2px;
       background: linear-gradient(90deg, var(--accent), transparent);
     }
-
+ 
     .avail-status {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 1.5rem;
     }
-
+ 
     .avail-dot {
       width: 8px;
       height: 8px;
@@ -784,14 +869,14 @@
       background: var(--accent);
       animation: pulse 2s infinite;
     }
-
+ 
     .avail-text {
       font-size: 11px;
       color: var(--accent);
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
-
+ 
     .avail-title {
       font-family: var(--sans);
       font-size: 1.5rem;
@@ -799,14 +884,14 @@
       margin-bottom: 1rem;
       letter-spacing: -0.5px;
     }
-
+ 
     .avail-roles {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 1.5rem;
     }
-
+ 
     .avail-role {
       font-size: 12px;
       padding: 6px 14px;
@@ -815,7 +900,7 @@
       color: var(--accent);
       border-radius: 2px;
     }
-
+ 
     /* FOOTER */
     footer {
       position: relative;
@@ -828,92 +913,333 @@
       color: var(--muted);
       font-size: 12px;
     }
-
+ 
     /* SCROLL REVEAL */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-
+ 
     .reveal.visible {
       opacity: 1;
       transform: none;
     }
-
+ 
     /* CURSOR LINE DECORATION */
     .cursor-line::after {
       content: '|';
       animation: blink 1s step-end infinite;
       color: var(--accent);
     }
-
+ 
     @keyframes blink {
-
+ 
       0%,
       100% {
         opacity: 1;
       }
-
+ 
       50% {
         opacity: 0;
       }
     }
-
-    @media (max-width: 768px) {
-      nav {
-        padding: 1rem 1.5rem;
+ 
+    /* ── TIGHTER SECTION GAPS ── */
+    section {
+      padding: 4rem 3rem;
+    }
+ 
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+ 
+    /* ── HAMBURGER MENU ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 2px;
+    }
+ 
+    .nav-hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      transition: transform 0.25s, opacity 0.25s;
+      transform-origin: center;
+    }
+ 
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+    .nav-mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 57px;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 20, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.5rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 0;
+    }
+ 
+    .nav-mobile-drawer.open {
+      display: flex;
+    }
+ 
+    .nav-mobile-drawer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+ 
+    .nav-mobile-drawer a:last-child { border-bottom: none; }
+    .nav-mobile-drawer a:hover { color: var(--accent); }
+ 
+    /* ── LARGE DESKTOP ── */
+    @media (min-width: 1024px) {
+      .hero-stats {
+        position: absolute;
+        right: 3rem;
+        bottom: 4rem;
+        flex-direction: column;
+        gap: 1.5rem;
       }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 6rem 1.5rem 3rem;
-      }
-
+    }
+ 
+    /* ── TABLET (769–1023px) ── */
+    @media (max-width: 1023px) {
       .hero-stats {
         position: static;
         flex-direction: row;
         justify-content: flex-start;
-        margin-top: 3rem;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
       }
-
+ 
+      .stat {
+        text-align: left;
+        border-right: none;
+        border-left: 2px solid var(--accent);
+        padding-right: 0;
+        padding-left: 1rem;
+      }
+ 
+      .company-block,
+      .exp-item {
+        grid-template-columns: 160px 1fr;
+        gap: 2rem;
+      }
+ 
+      .company-block::before,
+      .exp-item::before {
+        left: 151px;
+      }
+ 
+      .exp-item::after {
+        left: 146px;
+      }
+    }
+ 
+    /* ── MOBILE (≤768px) ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.25rem;
+      }
+ 
+      .nav-links {
+        display: none;
+      }
+ 
+      nav > .btn-secondary {
+        display: none;
+      }
+ 
+      .nav-hamburger {
+        display: flex;
+      }
+ 
+      .hero {
+        padding: 5.5rem 1.25rem 2.5rem;
+        min-height: auto;
+      }
+ 
+      .hero-name {
+        letter-spacing: -1px;
+        margin-bottom: 1rem;
+      }
+ 
+      .hero-stats {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 1.25rem;
+        margin-top: 2rem;
+      }
+ 
+      .stat {
+        text-align: left;
+        border-right: none;
+        border-left: 2px solid var(--accent);
+        padding-right: 0;
+        padding-left: 1rem;
+      }
+ 
+      .stat-num {
+        font-size: 1.8rem;
+      }
+ 
       section {
-        padding: 4rem 1.5rem;
+        padding: 3rem 1.25rem;
       }
-
+ 
+      .section-header {
+        margin-bottom: 2rem;
+        gap: 0.75rem;
+      }
+ 
+      .section-line {
+        display: none;
+      }
+ 
+      /* Experience: stack columns */
       .exp-item {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.5rem;
       }
-
+ 
       .exp-item::before,
       .exp-item::after {
         display: none;
       }
-
+ 
+      .exp-left {
+        padding-right: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1rem;
+      }
+ 
+      .exp-period {
+        margin-bottom: 0;
+      }
+ 
+      .exp-role {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+      }
+ 
+      /* Company blocks: stack columns */
+      .company-block {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+ 
+      .company-block::before {
+        display: none;
+      }
+ 
+      .company-left {
+        padding-right: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1rem;
+      }
+ 
+      .company-tenure,
+      .company-location-text {
+        margin-bottom: 0;
+      }
+ 
+      .subrole {
+        padding: 1.25rem 0 1.25rem 1.5rem;
+      }
+ 
+      .subrole-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+ 
+      .subrole-title {
+        font-size: 1rem;
+      }
+ 
+      /* Skills grid: 1 col on small mobile */
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+ 
+      .skill-card {
+        padding: 1.5rem;
+      }
+ 
+      /* Projects: 1 col */
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+ 
+      .project-card {
+        padding: 1.5rem;
+      }
+ 
+      /* Contact */
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
+ 
+      .contact-heading {
+        letter-spacing: -1px;
       }
-
+ 
       footer {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
         text-align: center;
+        padding: 1.5rem 1.25rem;
+      }
+    }
+ 
+    /* ── VERY SMALL (≤400px) ── */
+    @media (max-width: 400px) {
+      .hero-ctas {
+        flex-direction: column;
+      }
+ 
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
 </head>
-
+ 
 <body>
-
+ 
   <!-- NAV -->
   <nav>
     <div class="nav-logo">MN<span></span></div>
@@ -925,8 +1251,19 @@
     </ul>
     <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-secondary"
       style="font-size:11px; padding: 8px 18px;">LinkedIn ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
-
+  <!-- MOBILE DRAWER -->
+  <div class="nav-mobile-drawer" id="mobileDrawer">
+    <a href="#skills" class="mobile-nav-link">Skills</a>
+    <a href="#experience" class="mobile-nav-link">Experience</a>
+    <a href="#projects" class="mobile-nav-link">Projects</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+    <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="mobile-nav-link" style="color:var(--accent);">LinkedIn ↗</a>
+  </div>
+ 
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
@@ -962,7 +1299,7 @@
       </div> -->
     </div>
   </div>
-
+ 
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-header reveal">
@@ -970,7 +1307,7 @@
       <h2 class="section-title">Tech Stack</h2>
       <div class="section-line"></div>
     </div>
-
+ 
     <div class="skills-grid reveal">
       <div class="skill-card">
         <div class="skill-icon">🎭</div>
@@ -985,7 +1322,7 @@
           <span class="tag">Pytest</span>
         </div>
       </div>
-
+ 
       <div class="skill-card">
         <div class="skill-icon">🐍</div>
         <div class="skill-cat">Languages</div>
@@ -998,7 +1335,7 @@
           <span class="tag">JavaScript</span>
         </div>
       </div>
-
+ 
       <div class="skill-card">
         <div class="skill-icon">☁️</div>
         <div class="skill-cat">Cloud & DevOps</div>
@@ -1012,7 +1349,7 @@
           <span class="tag">Docker</span>
         </div>
       </div>
-
+ 
       <div class="skill-card">
         <div class="skill-icon">🔌</div>
         <div class="skill-cat">API & Backend</div>
@@ -1026,7 +1363,7 @@
           <!-- <span class="tag">GraphQL</span> -->
         </div>
       </div>
-
+ 
       <div class="skill-card">
         <div class="skill-icon">🗄️</div>
         <div class="skill-cat">Data & Storage</div>
@@ -1040,7 +1377,7 @@
           <span class="tag">MongoDB</span>
         </div>
       </div>
-
+ 
       <div class="skill-card">
         <div class="skill-icon">🤖</div>
         <div class="skill-cat">AI-Powered</div>
@@ -1056,7 +1393,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-header reveal">
@@ -1064,9 +1401,9 @@
       <h2 class="section-title">Experience</h2>
       <div class="section-line"></div>
     </div>
-
+ 
     <div class="exp-list">
-
+ 
       <!-- ═══ DRUVA (grouped) ═══ -->
       <div class="company-block reveal">
         <div class="company-left">
@@ -1079,7 +1416,7 @@
           <div style="margin-top:0.6rem; font-size:10px; color:var(--muted);">2 roles · 1+ yr</div>
         </div>
         <div class="subroles">
-
+ 
           <!-- Role 1: Staff SDET -->
           <div class="subrole">
             <div class="subrole-header">
@@ -1106,7 +1443,7 @@
               <span class="tag">AWS</span>
             </div>
           </div>
-
+ 
           <!-- Role 2: SDET -->
           <div class="subrole">
             <div class="subrole-header">
@@ -1131,10 +1468,10 @@
               <span class="tag">API Testing</span>
             </div>
           </div>
-
+ 
         </div>
       </div>
-
+ 
       <!-- ═══ ARCTERA (single role) ═══ -->
       <div class="exp-item reveal">
         <div class="exp-left">
@@ -1163,7 +1500,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- ═══ VERITAS (single role) ═══ -->
       <div class="exp-item reveal">
         <div class="exp-left">
@@ -1189,7 +1526,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- ═══ RAINLANG (single role) ═══ -->
       <div class="exp-item reveal">
         <div class="exp-left">
@@ -1220,7 +1557,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- ═══ SKILLEDGE (grouped) ═══ -->
       <div class="company-block reveal">
         <div class="company-left">
@@ -1233,7 +1570,7 @@
           <div style="margin-top:0.6rem; font-size:10px; color:var(--muted);">2 roles · 1 yr 9 mos</div>
         </div>
         <div class="subroles">
-
+ 
           <!-- Role 1: Software Developer -->
           <div class="subrole" style="border-left-color: rgba(240,160,90,0.3);">
             <style>
@@ -1263,7 +1600,7 @@
               <span class="tag">PHP</span>
             </div>
           </div>
-
+ 
           <!-- Role 2: Intern -->
           <div class="subrole" style="border-left-color: rgba(240,160,90,0.3);">
             <div class="subrole-header">
@@ -1283,13 +1620,13 @@
               <span class="tag">PHP</span>
             </div>
           </div>
-
+ 
         </div>
       </div>
-
+ 
     </div>
   </section>
-
+ 
   <!-- EDUCATION -->
   <section id="education">
     <div class="section-header reveal">
@@ -1297,7 +1634,7 @@
       <h2 class="section-title">Education</h2>
       <div class="section-line"></div>
     </div>
-
+ 
     <div class="exp-list">
       <div class="exp-item reveal">
         <div class="exp-left">
@@ -1326,7 +1663,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- PROJECTS -->
   <section id="projects">
     <div class="section-header reveal">
@@ -1334,9 +1671,9 @@
       <h2 class="section-title">Projects</h2>
       <div class="section-line"></div>
     </div>
-
+ 
     <div class="projects-grid reveal">
-
+ 
       <!-- PROJECT 1 -->
       <div class="project-card" data-num="01">
         <div class="project-card-top">
@@ -1364,7 +1701,7 @@
           <span class="tag">CLI Dashboard</span>
         </div>
       </div>
-
+ 
       <!-- PROJECT 2 -->
       <div class="project-card" data-num="02">
         <div class="project-card-top">
@@ -1392,7 +1729,7 @@
           <span class="tag">REST API</span>
         </div>
       </div>
-
+ 
       <!-- PROJECT 3 -->
       <div class="project-card" data-num="03">
         <div class="project-card-top">
@@ -1419,7 +1756,7 @@
           <span class="tag">CSV Export</span>
         </div>
       </div>
-
+ 
       <!-- PROJECT 4 -->
       <div class="project-card" data-num="04">
         <div class="project-card-top">
@@ -1447,16 +1784,16 @@
           <span class="tag">Netlify</span>
         </div>
       </div>
-
+ 
     </div>
-
+ 
     <div style="text-align:center; margin-top: 2.5rem;">
       <a href="https://github.com/mayur-nagare" target="_blank" class="btn-secondary">
         View all on GitHub ↗
       </a>
     </div>
   </section>
-
+ 
   <!-- CONTACT -->
   <section id="contact">
     <div class="contact-grid">
@@ -1469,7 +1806,7 @@
         </p>
         <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="btn-primary">View LinkedIn ↗</a>
       </div>
-
+ 
       <div class="reveal">
         <div class="avail-card" style="margin-bottom: 1rem;">
           <div class="avail-status">
@@ -1486,7 +1823,7 @@
             <!-- <span class="avail-role">Test Architect</span> -->
           </div>
         </div>
-
+ 
         <div class="contact-links">
           <a href="https://www.linkedin.com/in/mayurnagare/" target="_blank" class="contact-link">
             <span class="contact-link-icon">in</span>
@@ -1502,14 +1839,14 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- FOOTER -->
   <footer>
     <span>© 2026 Mayur Nagare — SDET</span>
     <span style="color: var(--accent);">Pune, India &nbsp;·&nbsp; Open to opportunities</span>
     <span>Built with precision 🛠</span>
   </footer>
-
+ 
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
@@ -1518,9 +1855,25 @@
         }
       });
     }, { threshold: 0.1 });
-
+ 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+ 
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobileDrawer');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+    });
+    // Close drawer on nav link click
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+      });
+    });
   </script>
 </body>
-
+ 
 </html>
+
